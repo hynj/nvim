@@ -6,9 +6,32 @@ vim.cmd "set shiftwidth=2"
 
 -- Set leader to space
 vim.g.mapleader = " "
-
+vim.opt.clipboard = "unnamedplus"
 local opt = vim.opt
 
+
+if vim.fn.has("wsl") == 1 then
+    if vim.fn.executable("wl-copy") == 0 then
+        print("wl-clipboard not found, clipboard integration won't work")
+    else
+        vim.g.clipboard = {
+            name = "wl-clipboard (wsl)",
+            copy = {
+                ["+"] = 'wl-copy --foreground --type text/plain',
+                ["*"] = 'wl-copy --foreground --primary --type text/plain',
+            },
+            paste = {
+                ["+"] = (function()
+                    return vim.fn.systemlist('wl-paste --no-newline|sed -e "s/\r$//"', {''}, 1) -- '1' keeps empty lines
+                end),
+                ["*"] = (function() 
+                    return vim.fn.systemlist('wl-paste --primary --no-newline|sed -e "s/\r$//"', {''}, 1)
+                end),
+            },
+            cache_enabled = true
+        }
+    end
+end
 opt.autowrite = true -- Enable auto write
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
