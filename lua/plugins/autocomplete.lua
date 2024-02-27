@@ -34,7 +34,7 @@ return {
           ["<CR>"] = cmp.mapping.confirm { select = true }, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         },
         sources = cmp.config.sources({
-         { name = "nvim_lsp" },
+          { name = "nvim_lsp" },
           { name = "luasnip" }, -- For luasnip users.
         }, {
           { name = "buffer" },
@@ -69,4 +69,15 @@ return {
       })
     end,
   },
+  {
+    'altermo/ultimate-autopair.nvim',
+    event = { 'InsertEnter', 'CmdlineEnter' },
+
+    branch = 'v0.6', --recommended as each new version will have breaking changes
+    opts = {
+
+      --Config goes here
+    },
+
+  }
 }
