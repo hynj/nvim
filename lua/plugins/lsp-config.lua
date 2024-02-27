@@ -13,6 +13,7 @@ return {
           "lua_ls",
           "tsserver",
           "biome",
+          "svelte"
         },
       }
     end,
@@ -33,6 +34,7 @@ return {
           client.server_capabilities.documentFormattingProvider = false
         end,
       }
+      lspconfig.svelte.setup{}
       lspconfig.biome.setup {
         capabilities = capabilities,
       }

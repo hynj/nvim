@@ -26,7 +26,7 @@ return {
       },
       {
         name = "frca",
-        path = "~/vaults/frca",
+        path = "~/Obsidian/frca",
       },
     },
 
