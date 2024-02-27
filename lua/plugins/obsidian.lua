@@ -32,6 +32,12 @@ return {
 
     -- see below for full list of options 👇
   },
+  keys = {
+    { "<leader>nn", "<cmd>ObsidianNew<cr>", desc = "Make a new note obsidian" },
+    {"<leader>nf", "<cmd>ObsidianFollowLink<cr>", desc = "Follow an obsidian linK"},
+    {"<leader>nl", "<cmd>ObsidianLinks<cr>", desc = "Show links"},
+    {"<leader>nb", "<cmd>ObsidianBacklinks<cr>", desc = "Show back links"}
+  },
   completion = {
     -- Set to false to disable completion.
     nvim_cmp = true,
