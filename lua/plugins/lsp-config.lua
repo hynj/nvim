@@ -11,7 +11,7 @@ return {
       require("mason-lspconfig").setup {
         ensure_installed = {
           "lua_ls",
-          "tsserver",
+          "ts_ls",
           "biome",
           "svelte"
         },
@@ -26,10 +26,9 @@ return {
       lspconfig.lua_ls.setup {
         capabilities = capabilities,
       }
-      lspconfig.tsserver.setup {
+      lspconfig.ts_ls.setup {
         capabilities = capabilities,
         on_attach = function(client)
-          -- this is important, otherwise tsserver will format ts/js
           -- files which we *really* don't want.
           client.server_capabilities.documentFormattingProvider = false
         end,
@@ -43,6 +42,7 @@ return {
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
       vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
       vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
+      vim.keymap.set("n", "gK", vim.lsp.buf.hover, opts)
     end,
   },
 }
