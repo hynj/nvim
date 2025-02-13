@@ -30,19 +30,18 @@ return {
         capabilities = capabilities,
         on_attach = function(client)
           -- files which we *really* don't want.
-          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentFormattingProvider = true
         end,
       }
-      lspconfig.svelte.setup{}
+      lspconfig.svelte.setup {}
       lspconfig.biome.setup {
         capabilities = capabilities,
       }
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-      vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
-      vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
-      vim.keymap.set("n", "gK", vim.lsp.buf.hover, opts)
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover LSP" })
+      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" })
+      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename variable" })
+      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
     end,
   },
 }
