@@ -10,7 +10,6 @@ return {
     config = function()
       require("mason-lspconfig").setup {
         ensure_installed = {
-          "lua_ls",
           "ts_ls",
           "biome",
           "svelte"
@@ -22,21 +21,28 @@ return {
     "neovim/nvim-lspconfig",
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      local lspconfig = require "lspconfig"
-      lspconfig.lua_ls.setup {
+
+      vim.lsp.config("lua_ls", {
         capabilities = capabilities,
-      }
-      lspconfig.ts_ls.setup {
+      })
+
+      vim.lsp.config("ts_ls", {
         capabilities = capabilities,
         on_attach = function(client)
-          -- files which we *really* don't want.
           client.server_capabilities.documentFormattingProvider = true
         end,
-      }
-      lspconfig.svelte.setup {}
-      lspconfig.biome.setup {
+      })
+
+      vim.lsp.config("svelte", {
         capabilities = capabilities,
-      }
+      })
+
+      vim.lsp.config("biome", {
+        capabilities = capabilities,
+      })
+
+      vim.lsp.enable({ "lua_ls", "ts_ls", "svelte", "biome" })
+
       vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover LSP" })
       vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" })
